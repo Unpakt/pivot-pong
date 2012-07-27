@@ -113,4 +113,22 @@ describe MatchesController do
       response.body.should == ["Danny Burkes", "Davis Frank"].join("\n")
     end
   end
+
+  describe "#games" do
+    let(:player1) { Player.create(name: "player 1") }
+    let(:player2) { Player.create(name: "player 2") }
+
+    before do
+      Match.create(winner: player1, loser: player2)
+      Match.create(winner: player2, loser: player1)
+    end
+
+    it "returns the number of games" do
+      get :games
+      response.should be_success
+      response.body.should == "2"
+    end
+
+  end
+
 end

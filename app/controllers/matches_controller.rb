@@ -39,4 +39,8 @@ class MatchesController < ApplicationController
 
     render text: names.collect(&:downcase).sort.uniq.collect(&:titleize).join("\n")
   end
+
+  def games
+    render text: Match.count
+  end
 end
